@@ -17,6 +17,8 @@ public class Test1 {
     @Test
     public void test() {
         
+        int a = 10;
+        
         Persistence.createEntityManagerFactory("PU");
     }
     
