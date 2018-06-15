@@ -30,7 +30,8 @@ public class Joueur implements Serializable {
         N_A_PAS_LA_MAIN,
         A_LA_MAIN,
         SOMMEIL_PROFOND,
-        PERDU
+        PERDU,
+        GAGNE
     }
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +40,7 @@ public class Joueur implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EtatJoueur etat;
     
     @Column(unique = true)
@@ -58,6 +60,75 @@ public class Joueur implements Serializable {
     @ManyToOne
     @JoinColumn
     private Partie partie;
+    
+    @Column(nullable = false)
+    private Long ordre;
+
+    public EtatJoueur getEtat() {
+        return etat;
+    }
+
+    public void setEtat(EtatJoueur etat) {
+        this.etat = etat;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Long getNbPartiesGagnees() {
+        return nbPartiesGagnees;
+    }
+
+    public void setNbPartiesGagnees(Long nbPartiesGagnees) {
+        this.nbPartiesGagnees = nbPartiesGagnees;
+    }
+
+    public Long getNbPartiesJouees() {
+        return nbPartiesJouees;
+    }
+
+    public void setNbPartiesJouees(Long nbPartiesJouees) {
+        this.nbPartiesJouees = nbPartiesJouees;
+    }
+
+    public List<Carte> getCartes() {
+        return cartes;
+    }
+
+    public void setCartes(List<Carte> cartes) {
+        this.cartes = cartes;
+    }
+
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
+    }
+
+    public Long getOrdre() {
+        return ordre;
+    }
+
+    public void setOrdre(Long ordre) {
+        this.ordre = ordre;
+    }
+    
+    
     
     public Long getId() {
         return id;
