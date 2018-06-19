@@ -5,9 +5,11 @@
  */
 package atos.magiemagie.test;
 
+import atos.magiemagie.entity.Joueur;
 import atos.magiemagie.entity.Partie;
 import atos.magiemagie.service.JoueurService;
 import atos.magiemagie.service.PartieService;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -16,14 +18,26 @@ import org.junit.Test;
  */
 public class JoueurServiceTest {
     
-    private JoueurService service = new JoueurService();
+    private JoueurService joueurService = new JoueurService();
     private PartieService partieService = new PartieService();
+    
+    @Test
+    public void ordreJoueursOK(){
+        
+        Partie nouvellePartie = partieService.creerNouvellePartie("ordreJoueursOK");
+        
+        joueurService.rejoindrePartie("A", "A", nouvellePartie.getId());
+        joueurService.rejoindrePartie("B", "B", nouvellePartie.getId());
+        Joueur j = joueurService.rejoindrePartie("C", "C", nouvellePartie.getId());
+        
+        assertEquals(3L, (long) j.getOrdre());
+    }
     
     @Test
     public void rejoindrePartieOK(){
         
         Partie nouvellePartie = partieService.creerNouvellePartie("partie 1");
         
-        service.rejoindrePartie("thomas", "blabla", nouvellePartie.getId());
+        joueurService.rejoindrePartie("thomas", "blabla", nouvellePartie.getId());
     }
 }

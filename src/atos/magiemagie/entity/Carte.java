@@ -43,6 +43,22 @@ public class Carte implements Serializable {
     @ManyToOne
     @JoinColumn
     private Joueur joueur;
+
+    public TypeCarte getTypeCarte() {
+        return typeCarte;
+    }
+
+    public void setTypeCarte(TypeCarte typeCarte) {
+        this.typeCarte = typeCarte;
+    }
+
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
+    }
     
     public Long getId() {
         return id;

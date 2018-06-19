@@ -26,6 +26,11 @@ public class PartieService {
         return p;
     }
     
+    /**
+     * Liste les parties dont aucun joueur n'est à l'état A_LA_MAIN
+     * ou GAGNE.
+     * @return 
+     */
     public List<Partie> listerPartiesNonDemarrees(){
         
         return dao.listerPartiesNonDemarrees();
