@@ -6,6 +6,7 @@
 package atos.magiemagie.dao;
 
 import atos.magiemagie.entity.Joueur;
+import atos.magiemagie.entity.Partie;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -16,6 +17,18 @@ import javax.persistence.Query;
  * @author quico
  */
 public class JoueurDAO {
+    
+    public Joueur rechercheJoueurQuiALaMainPourPartieId(long partieId){
+        
+         EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        
+         Query query = em.createQuery("SELECT j FROM Joueur j JOIN j.partie p WHERE j.etat=:etat AND p.id=:idPart");
+         query.setParameter("etat", Joueur.EtatJoueur.A_LA_MAIN);
+         query.setParameter("idPart", partieId);
+         
+         Joueur j =  (Joueur) query.getSingleResult();
+         return j;
+    }
     
     public long rechercheOrdreNouveauJoueurPourPartieId(long partieId){
         
@@ -69,5 +82,14 @@ public class JoueurDAO {
         em.getTransaction().commit();
     }
 
-    
+    public Joueur rechercheJoueurParPartieIdEtOrdre(long idPartie, long ordre) {
+        
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        
+        Query q = em.createQuery("SELECT j FROM Joueur j JOIN j.partie p WHERE p.id=:partieId AND j.ordre=:ordre");
+        q.setParameter("partieId", idPartie);
+        q.setParameter("ordre", ordre);
+        
+        return (Joueur) q.getSingleResult();
+    }
 }
